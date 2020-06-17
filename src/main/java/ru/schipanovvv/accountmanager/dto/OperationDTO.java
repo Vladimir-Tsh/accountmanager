@@ -1,19 +1,20 @@
 package ru.schipanovvv.accountmanager.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class OperationDTO {
     private int accountId;
     private Date operationDate;
     private OperationType operationType;
-    private float sum;
+    private BigDecimal sum;
     private int pid;
     private OperationState operationState;
 
     public OperationDTO() {
     }
 
-    public OperationDTO(int accountId, Date operationDate, OperationType operationType, float sum, int pid, OperationState operationState) {
+    public OperationDTO(int accountId, Date operationDate, OperationType operationType, BigDecimal sum, int pid, OperationState operationState) {
         this.accountId = accountId;
         this.operationDate = operationDate;
         this.operationType = operationType;
@@ -34,7 +35,7 @@ public class OperationDTO {
         return operationType;
     }
 
-    public float getSum() {
+    public BigDecimal getSum() {
         return sum;
     }
 
