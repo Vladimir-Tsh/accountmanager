@@ -42,7 +42,7 @@ public class OperationsGenerator implements Runnable {
                 e.printStackTrace();
             }
             try {
-                Thread.sleep(10000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -61,7 +61,7 @@ public class OperationsGenerator implements Runnable {
             operationType = OperationType.CREDIT;
         else
             operationType = OperationType.DEBET;
-        sum = Math.random() * 10;
-        return new OperationDTO(1,new Date(), operationType, BigDecimal.valueOf(sum).setScale(2, RoundingMode.HALF_EVEN), getPid(), OperationState.CREATED);
+        sum = 0.01 + Math.random() * 10;
+        return new OperationDTO(1,new Date(), operationType, BigDecimal.valueOf(sum).setScale(2, RoundingMode.DOWN), getPid(), OperationState.CREATED);
     }
 }

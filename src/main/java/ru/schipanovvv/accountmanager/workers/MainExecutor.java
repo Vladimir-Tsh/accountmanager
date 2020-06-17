@@ -31,7 +31,7 @@ public class MainExecutor implements Runnable {
         System.out.println("MainExecutor start.");
         while (needWork) {
             if (!queueService.getAllOperationsQueue().isEmpty()) {
-                synchronized (this) {
+//                synchronized (this) {
                     operationInJSON = (String) queueService.getAllOperationsQueue().poll();
                     try {
                         operationDTO = mapper.readValue(operationInJSON, OperationDTO.class);
@@ -39,7 +39,7 @@ public class MainExecutor implements Runnable {
                     } catch (JsonProcessingException e) {
                         e.printStackTrace();
                     }
-                }
+//                }
             }
 //            needWork = false;
         }
