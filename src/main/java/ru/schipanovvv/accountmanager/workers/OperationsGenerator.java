@@ -9,6 +9,8 @@ import ru.schipanovvv.accountmanager.dto.OperationState;
 import ru.schipanovvv.accountmanager.dto.OperationType;
 import ru.schipanovvv.accountmanager.service.QueueService;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 @Component
@@ -54,12 +56,12 @@ public class OperationsGenerator implements Runnable {
 
     public OperationDTO ganerateOperation() {
         OperationType operationType;
-        float sum;
+        double sum;
         if ((int) (Math.random() * 2) == 0)
             operationType = OperationType.CREDIT;
         else
             operationType = OperationType.DEBET;
-        sum = ((int) (Math.random() * 1000)) / 100f;
-        return new OperationDTO(1,new Date(), operationType, sum, getPid(), OperationState.CREATED);
+        sum = Math.random() * 10;
+        return new OperationDTO(1,new Date(), operationType, BigDecimal.valueOf(sum).setScale(2, RoundingMode.HALF_EVEN), getPid(), OperationState.CREATED);
     }
 }

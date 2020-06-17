@@ -13,7 +13,7 @@ CREATE TABLE account_operations (
   accountid INT NOT NULL,
   opdate DATE NOT NULL,
   optype VARCHAR(32) NOT NULL,
-  opsum FLOAT NOT NULL,
+  opsum DOUBLE NOT NULL,
   pid INT NOT NULL,
   opstate VARCHAR(32) NOT NULL,
   foreign key (accountid) references accounts(id)

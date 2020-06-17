@@ -19,7 +19,7 @@ public class AccountOperation {
     @Column(name = "optype")
     private String operationType;
     @Column(name = "opsum")
-    private float sum;
+    private double sum;
     @Column(name = "pid")
     private int pid;
     @Column(name = "opstate")
@@ -28,7 +28,7 @@ public class AccountOperation {
     public AccountOperation() {
     }
 
-    public AccountOperation(int accountId, Date operationDate, String operationType, float sum, int pid, String operationState) {
+    public AccountOperation(int accountId, Date operationDate, String operationType, double sum, int pid, String operationState) {
         this.accountId = accountId;
         this.operationDate = operationDate;
         this.operationType = operationType;
@@ -69,7 +69,7 @@ public class AccountOperation {
         this.operationType = operationType;
     }
 
-    public float getSum() {
+    public double getSum() {
         return sum;
     }
 

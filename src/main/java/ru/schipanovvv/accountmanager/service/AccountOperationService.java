@@ -19,7 +19,7 @@ public class AccountOperationService {
         AccountOperation accountOperation = new AccountOperation(operationDTO.getAccountId(),
                 operationDTO.getOperationDate(),
                 operationDTO.getOperationType().toString(),
-                operationDTO.getSum(),
+                operationDTO.getSum().doubleValue(),
                 operationDTO.getPid(),
                 operationDTO.getOperationState().toString());
         accountOperation = accountOperationCrudRepository.save(accountOperation);
