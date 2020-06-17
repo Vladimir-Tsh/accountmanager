@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class OperationDTO {
     private int accountId;
-    private Date operatiopnDate;
+    private Date operationDate;
     private OperationType operationType;
     private float sum;
     private int pid;
@@ -13,9 +13,9 @@ public class OperationDTO {
     public OperationDTO() {
     }
 
-    public OperationDTO(int accountId, Date operatopnDate, OperationType operationType, float sum, int pid, OperationState operationState) {
+    public OperationDTO(int accountId, Date operationDate, OperationType operationType, float sum, int pid, OperationState operationState) {
         this.accountId = accountId;
-        this.operatiopnDate = operatopnDate;
+        this.operationDate = operationDate;
         this.operationType = operationType;
         this.sum = sum;
         this.pid = pid;
@@ -26,8 +26,8 @@ public class OperationDTO {
         return accountId;
     }
 
-    public Date getOperatiopnDate() {
-        return operatiopnDate;
+    public Date getOperationDate() {
+        return operationDate;
     }
 
     public OperationType getOperationType() {

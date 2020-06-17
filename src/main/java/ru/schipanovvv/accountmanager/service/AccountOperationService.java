@@ -17,7 +17,7 @@ public class AccountOperationService {
     @Transactional
     public void newAccountOperation(OperationDTO operationDTO) {
         AccountOperation accountOperation = new AccountOperation(operationDTO.getAccountId(),
-                operationDTO.getOperatiopnDate(),
+                operationDTO.getOperationDate(),
                 operationDTO.getOperationType().toString(),
                 operationDTO.getSum(),
                 operationDTO.getPid(),
