@@ -22,16 +22,19 @@ public class AccountOperation {
     private float sum;
     @Column(name = "pid")
     private int pid;
+    @Column(name = "opstate")
+    private String operationState;
 
     public AccountOperation() {
     }
 
-    public AccountOperation(int accountId, Date operationDate, String operationType, float sum, int pid) {
+    public AccountOperation(int accountId, Date operationDate, String operationType, float sum, int pid, String operationState) {
         this.accountId = accountId;
         this.operationDate = operationDate;
         this.operationType = operationType;
         this.sum = sum;
         this.pid = pid;
+        this.operationState = operationState;
     }
 
     public int getId() {
@@ -80,5 +83,13 @@ public class AccountOperation {
 
     public void setPid(int pid) {
         this.pid = pid;
+    }
+
+    public String getOperationState() {
+        return operationState;
+    }
+
+    public void setOperationState(String operationState) {
+        this.operationState = operationState;
     }
 }

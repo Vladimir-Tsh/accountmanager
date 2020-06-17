@@ -15,12 +15,13 @@ CREATE TABLE account_operations (
   optype VARCHAR(32) NOT NULL,
   opsum FLOAT NOT NULL,
   pid INT NOT NULL,
+  opstate VARCHAR(32) NOT NULL,
   foreign key (accountid) references accounts(id)
 );
 
 INSERT INTO accounts (account) VALUES
   ('40410581000000000001');
 
-INSERT INTO account_operations VALUES (
-  1, 1, '2020-06-16', 'DEBET', 0.01, 1
-);
+--INSERT INTO account_operations VALUES (
+--  1, 1, '2020-06-16', 'DEBET', 0.01, 1
+--);

@@ -15,7 +15,7 @@ public class AccountmanagerApplication implements CommandLineRunner {
 	int countOperationsGenerator = 3;
 
 	@Autowired
-	private ApplicationContext сontext;
+	private ApplicationContext context;
 
 	@Bean
 	public ThreadPoolTaskExecutor taskExecutor() {
@@ -36,13 +36,13 @@ public class AccountmanagerApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		ThreadPoolTaskExecutor taskExecutor = (ThreadPoolTaskExecutor) сontext.getBean("taskExecutor");
+		ThreadPoolTaskExecutor taskExecutor = (ThreadPoolTaskExecutor) context.getBean("taskExecutor");
 		for (int i = 0; i < countOperationsGenerator; i++) {
-			OperationsGenerator operationsGenerator = (OperationsGenerator) сontext.getBean("operationsGenerator");
+			OperationsGenerator operationsGenerator = (OperationsGenerator) context.getBean("operationsGenerator");
 			taskExecutor.execute(operationsGenerator);
 		}
 
-		MainExecutor mainExecutor = (MainExecutor) сontext.getBean("mainExecutor");
+		MainExecutor mainExecutor = (MainExecutor) context.getBean("mainExecutor");
 		taskExecutor.execute(mainExecutor);
 	}
 }

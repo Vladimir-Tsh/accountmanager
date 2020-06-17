@@ -20,7 +20,8 @@ public class AccountOperationService {
                 operationDTO.getOperatiopnDate(),
                 operationDTO.getOperationType().toString(),
                 operationDTO.getSum(),
-                operationDTO.getPid());
+                operationDTO.getPid(),
+                operationDTO.getOperationState().toString());
         accountOperation = accountOperationCrudRepository.save(accountOperation);
         System.out.println(accountOperation.getId() + " : " + accountOperation.getAccountId() + " : " + accountOperation.getSum() + " : " + accountOperation.getPid());
     }

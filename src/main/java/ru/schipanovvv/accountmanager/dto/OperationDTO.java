@@ -8,16 +8,18 @@ public class OperationDTO {
     private OperationType operationType;
     private float sum;
     private int pid;
+    private OperationState operationState;
 
     public OperationDTO() {
     }
 
-    public OperationDTO(int accountId, Date operatopnDate, OperationType operationType, float sum, int pid) {
+    public OperationDTO(int accountId, Date operatopnDate, OperationType operationType, float sum, int pid, OperationState operationState) {
         this.accountId = accountId;
         this.operatiopnDate = operatopnDate;
         this.operationType = operationType;
         this.sum = sum;
         this.pid = pid;
+        this.operationState = operationState;
     }
 
     public int getAccountId() {
@@ -38,5 +40,9 @@ public class OperationDTO {
 
     public int getPid() {
         return pid;
+    }
+
+    public OperationState getOperationState() {
+        return operationState;
     }
 }

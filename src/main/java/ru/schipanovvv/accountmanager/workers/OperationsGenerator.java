@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ru.schipanovvv.accountmanager.dto.OperationDTO;
+import ru.schipanovvv.accountmanager.dto.OperationState;
 import ru.schipanovvv.accountmanager.dto.OperationType;
 import ru.schipanovvv.accountmanager.service.QueueService;
 
@@ -59,6 +60,6 @@ public class OperationsGenerator implements Runnable {
         else
             operationType = OperationType.DEBET;
         sum = ((int) (Math.random() * 1000)) / 100f;
-        return new OperationDTO(1,new Date(), operationType, sum, getPid());
+        return new OperationDTO(1,new Date(), operationType, sum, getPid(), OperationState.CREATED);
     }
 }
