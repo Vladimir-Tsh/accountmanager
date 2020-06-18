@@ -20,7 +20,7 @@ public class AccountOperationService {
     }
 
     @Transactional
-    public void newAccountOperation(OperationDTO operationDTO) {
+    public OperationDTO newAccountOperation(OperationDTO operationDTO) {
 
         AccountOperation accountOperation = new AccountOperation(operationDTO.getAccountId(),
                 operationDTO.getOperationDate(),
@@ -59,5 +59,12 @@ public class AccountOperationService {
         accountOperation = accountOperationCrudRepository.save(accountOperation);
 
         System.out.println(accountOperation.getId() + " : " + accountOperation.getAccountId() + " : " + accountOperation.getSum() + " : " + accountOperation.getPid() + " : " + accountOperation.getOperationState());
+
+        return new OperationDTO(accountOperation.getAccountId(),
+                accountOperation.getOperationDate(),
+                OperationType.valueOf(accountOperation.getOperationType()),
+                BigDecimal.valueOf(accountOperation.getSum()),
+                accountOperation.getPid(),
+                OperationState.valueOf(accountOperation.getOperationState()));
     }
 }

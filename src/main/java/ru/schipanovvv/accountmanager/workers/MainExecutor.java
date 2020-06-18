@@ -2,12 +2,10 @@ package ru.schipanovvv.accountmanager.workers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.schipanovvv.accountmanager.dto.OperationDTO;
+import ru.schipanovvv.accountmanager.dto.OperationState;
 import ru.schipanovvv.accountmanager.service.AccountOperationService;
 import ru.schipanovvv.accountmanager.service.QueueService;
 
@@ -26,18 +24,24 @@ public class MainExecutor implements Runnable {
     public void run() {
         boolean needWork = true;
         ObjectMapper mapper = new ObjectMapper();
-        OperationDTO operationDTO;
+        OperationDTO operationDTO = null;
         String operationInJSON;
         System.out.println("MainExecutor start.");
         while (needWork) {
             if (!queueService.getAllOperationsQueue().isEmpty()) {
 //                synchronized (this) {
                     operationInJSON = (String) queueService.getAllOperationsQueue().poll();
+
                     try {
                         operationDTO = mapper.readValue(operationInJSON, OperationDTO.class);
-                        accountOperationService.newAccountOperation(operationDTO);
+                        operationDTO = accountOperationService.newAccountOperation(operationDTO);
                     } catch (JsonProcessingException e) {
                         e.printStackTrace();
+                    }
+
+                    if (operationDTO.getOperationState().equals(OperationState.WAITING)) {
+                        queueService.getWaitingOperationsQueue().add(operationDTO);
+                        System.out.println("WaitingOperationsQueue: " + queueService.getWaitingOperationsQueue().size());
                     }
 //                }
             }
