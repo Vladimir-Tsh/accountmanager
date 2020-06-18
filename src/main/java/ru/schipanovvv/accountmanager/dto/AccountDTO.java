@@ -1,11 +1,13 @@
 package ru.schipanovvv.accountmanager.dto;
 
+import java.math.BigDecimal;
+
 public class AccountDTO {
     private final int accountId;
     private final AccountState accountState;
-    private final float accountBalance;
+    private final BigDecimal accountBalance;
 
-    public AccountDTO(int accountId, AccountState accountState, float accountBalance) {
+    public AccountDTO(int accountId, AccountState accountState, BigDecimal accountBalance) {
         this.accountId = accountId;
         this.accountState = accountState;
         this.accountBalance = accountBalance;
@@ -19,7 +21,7 @@ public class AccountDTO {
         return accountState;
     }
 
-    public float getAccountBalance() {
+    public BigDecimal getAccountBalance() {
         return accountBalance;
     }
 }

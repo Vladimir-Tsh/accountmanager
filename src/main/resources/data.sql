@@ -5,7 +5,7 @@ CREATE TABLE accounts (
   id INT AUTO_INCREMENT PRIMARY KEY,
   account VARCHAR(32) NOT NULL,
   state VARCHAR(32) DEFAULT 'OPEN',
-  balance FLOAT DEFAULT 0.00
+  balance DOUBLE DEFAULT 0.00
 );
 
 CREATE TABLE account_operations (

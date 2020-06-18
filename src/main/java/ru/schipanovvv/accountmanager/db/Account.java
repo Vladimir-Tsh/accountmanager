@@ -14,12 +14,12 @@ public class Account {
     @Column(name = "state")
     private String state;
     @Column(name = "balance")
-    private float balance;
+    private double balance;
 
     public Account() {
     }
 
-    public Account(String account, String state, float balance) {
+    public Account(String account, String state, double balance) {
 //        this.id = id;
         this.account = account;
         this.state = state;
@@ -50,11 +50,11 @@ public class Account {
         this.state = state;
     }
 
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 }

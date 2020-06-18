@@ -7,6 +7,8 @@ import ru.schipanovvv.accountmanager.dto.AccountDTO;
 import ru.schipanovvv.accountmanager.db.Account;
 import ru.schipanovvv.accountmanager.repositiry.AccountCrudRepository;
 
+import java.math.BigDecimal;
+
 @Service
 public class AccountService {
     private AccountCrudRepository accountCrudRepository;
@@ -17,7 +19,7 @@ public class AccountService {
 
     public AccountDTO getAccount(int id) {
         Account account = accountCrudRepository.findById(id).orElseThrow(RuntimeException::new);
-        return new AccountDTO(account.getId(), AccountState.valueOf(account.getState()), account.getBalance());
+        return new AccountDTO(account.getId(), AccountState.valueOf(account.getState()), BigDecimal.valueOf(account.getBalance()));
     }
 
     @Transactional
@@ -28,6 +30,13 @@ public class AccountService {
         } else {
             account.setState(AccountState.OPEN.toString());
         }
-        return new AccountDTO(account.getId(), AccountState.valueOf(account.getState()), account.getBalance());
+        return new AccountDTO(account.getId(), AccountState.valueOf(account.getState()), BigDecimal.valueOf(account.getBalance()));
+    }
+
+    @Transactional
+    public AccountDTO setAccountBalance(int id, double balance) {
+        Account account = accountCrudRepository.findById(id).orElseThrow(RuntimeException::new);
+        account.setBalance(balance);
+        return new AccountDTO(account.getId(), AccountState.valueOf(account.getState()), BigDecimal.valueOf(account.getBalance()));
     }
 }
