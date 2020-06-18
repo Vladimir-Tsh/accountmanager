@@ -35,7 +35,12 @@ public class MainExecutor implements Runnable {
                     operationInJSON = (String) queueService.getAllOperationsQueue().poll();
                     try {
                         operationDTO = mapper.readValue(operationInJSON, OperationDTO.class);
-                        accountOperationService.newAccountOperation(operationDTO);
+                        switch (operationDTO.getOperationType()) {
+                            case DEBET:
+                                accountOperationService.newAccountOperation(operationDTO); break;
+                            case CREDIT:
+                                break;
+                        }
                     } catch (JsonProcessingException e) {
                         e.printStackTrace();
                     }
