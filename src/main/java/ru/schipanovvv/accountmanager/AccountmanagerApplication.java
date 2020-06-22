@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import ru.schipanovvv.accountmanager.workers.MainExecutor;
 import ru.schipanovvv.accountmanager.workers.OperationsGenerator;
+import ru.schipanovvv.accountmanager.workers.WaitExecutor;
 
 @SpringBootApplication
 public class AccountmanagerApplication implements CommandLineRunner {
@@ -44,5 +45,8 @@ public class AccountmanagerApplication implements CommandLineRunner {
 
 		MainExecutor mainExecutor = (MainExecutor) context.getBean("mainExecutor");
 		taskExecutor.execute(mainExecutor);
+
+		WaitExecutor waitExecutor = (WaitExecutor) context.getBean("waitExecutor");
+		taskExecutor.execute(waitExecutor);
 	}
 }

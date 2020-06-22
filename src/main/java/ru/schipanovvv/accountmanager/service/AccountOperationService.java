@@ -20,7 +20,7 @@ public class AccountOperationService {
     }
 
     @Transactional
-    public OperationDTO newAccountOperation(OperationDTO operationDTO) {
+    public AccountOperationDTO newAccountOperation(OperationDTO operationDTO) {
 
         AccountOperation accountOperation = new AccountOperation(operationDTO.getAccountId(),
                 operationDTO.getOperationDate(),
@@ -60,7 +60,36 @@ public class AccountOperationService {
 
         System.out.println(accountOperation.getId() + " : " + accountOperation.getAccountId() + " : " + accountOperation.getSum() + " : " + accountOperation.getPid() + " : " + accountOperation.getOperationState());
 
-        return new OperationDTO(accountOperation.getAccountId(),
+        return new AccountOperationDTO(accountOperation.getId(), accountOperation.getAccountId(),
+                accountOperation.getOperationDate(),
+                OperationType.valueOf(accountOperation.getOperationType()),
+                BigDecimal.valueOf(accountOperation.getSum()),
+                accountOperation.getPid(),
+                OperationState.valueOf(accountOperation.getOperationState()));
+    }
+
+    @Transactional
+    public AccountOperationDTO executeWaitOperation(AccountOperationDTO accountOperationDTO) {
+        AccountDTO accountDTO = accountService.getAccount(accountOperationDTO.getAccountId());
+        AccountOperation accountOperation = accountOperationCrudRepository.findById(accountOperationDTO.getOperationId()).orElseThrow(RuntimeException::new);
+
+        if (accountDTO.getAccountState().equals(AccountState.BLOCKED) ||
+                accountDTO.getAccountState().equals(AccountState.CLOSED)) {
+
+            accountOperation.setOperationState(OperationState.DENIED.toString());
+
+        } else if (accountDTO.getAccountBalance().compareTo(accountOperationDTO.getSum()) > 0) {
+
+            BigDecimal newAccountBalance = accountDTO.getAccountBalance().subtract(accountOperationDTO.getSum());
+
+            accountDTO = accountService.setAccountBalance(accountOperationDTO.getAccountId(), newAccountBalance.doubleValue());
+            accountOperation.setOperationState(OperationState.EXECUTED.toString());
+
+        }
+
+        System.out.println(accountOperation.getId() + " : " + accountOperation.getAccountId() + " : " + accountOperation.getSum() + " : " + accountOperation.getPid() + " : " + accountOperation.getOperationState());
+
+        return new AccountOperationDTO(accountOperation.getId(), accountOperation.getAccountId(),
                 accountOperation.getOperationDate(),
                 OperationType.valueOf(accountOperation.getOperationType()),
                 BigDecimal.valueOf(accountOperation.getSum()),

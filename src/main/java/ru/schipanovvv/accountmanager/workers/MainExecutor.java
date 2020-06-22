@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import ru.schipanovvv.accountmanager.dto.AccountOperationDTO;
 import ru.schipanovvv.accountmanager.dto.OperationDTO;
 import ru.schipanovvv.accountmanager.dto.OperationState;
 import ru.schipanovvv.accountmanager.service.AccountOperationService;
@@ -25,6 +26,7 @@ public class MainExecutor implements Runnable {
         boolean needWork = true;
         ObjectMapper mapper = new ObjectMapper();
         OperationDTO operationDTO = null;
+        AccountOperationDTO accountOperationDTO = null;
         String operationInJSON;
         System.out.println("MainExecutor start.");
         while (needWork) {
@@ -34,13 +36,13 @@ public class MainExecutor implements Runnable {
 
                     try {
                         operationDTO = mapper.readValue(operationInJSON, OperationDTO.class);
-                        operationDTO = accountOperationService.newAccountOperation(operationDTO);
+                        accountOperationDTO = accountOperationService.newAccountOperation(operationDTO);
                     } catch (JsonProcessingException e) {
                         e.printStackTrace();
                     }
 
-                    if (operationDTO.getOperationState().equals(OperationState.WAITING)) {
-                        queueService.getWaitingOperationsQueue().add(operationDTO);
+                    if (accountOperationDTO.getOperationState().equals(OperationState.WAITING)) {
+                        queueService.getWaitingOperationsQueue().add(accountOperationDTO);
                         System.out.println("WaitingOperationsQueue: " + queueService.getWaitingOperationsQueue().size());
                     }
 //                }
