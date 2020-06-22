@@ -43,7 +43,6 @@ public class MainExecutor implements Runnable {
 
                     if (accountOperationDTO.getOperationState().equals(OperationState.WAITING)) {
                         queueService.getWaitingOperationsQueue().add(accountOperationDTO);
-                        System.out.println("WaitingOperationsQueue: " + queueService.getWaitingOperationsQueue().size());
                     }
 //                }
             }
