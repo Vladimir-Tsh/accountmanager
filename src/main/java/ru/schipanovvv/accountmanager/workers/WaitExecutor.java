@@ -25,12 +25,10 @@ public class WaitExecutor implements Runnable {
         System.out.println("WaitExecutor start.");
         while (needWork) {
             if (!queueService.getWaitingOperationsQueue().isEmpty()) {
-                System.out.println("WaitExecutor START. WaitingOperationsQueue: " + queueService.getWaitingOperationsQueue().size());
                 accountOperationDTO = (AccountOperationDTO) queueService.getWaitingOperationsQueue().poll();
                 accountOperationDTO = accountOperationService.executeWaitOperation(accountOperationDTO);
                 if (accountOperationDTO.getOperationState().equals(OperationState.WAITING)) {
                     queueService.getWaitingOperationsQueue().add(accountOperationDTO);
-                    System.out.println("WaitExecutor END. WaitingOperationsQueue: " + queueService.getWaitingOperationsQueue().size());
                 }
             }
         }
