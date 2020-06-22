@@ -14,8 +14,4 @@ public class AccountOperationDTO extends OperationDTO {
     public int getOperationId() {
         return operationId;
     }
-
-    public void setOperationId(int operationId) {
-        this.operationId = operationId;
-    }
 }
