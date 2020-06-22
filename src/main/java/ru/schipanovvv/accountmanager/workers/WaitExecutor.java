@@ -31,6 +31,11 @@ public class WaitExecutor implements Runnable {
                     queueService.getWaitingOperationsQueue().add(accountOperationDTO);
                 }
             }
+            /*try {
+                Thread.sleep(1000/(1 + queueService.getWaitingOperationsQueue().size()));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
         }
     }
 }

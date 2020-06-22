@@ -58,7 +58,7 @@ public class AccountOperationService {
 
         accountOperation = accountOperationCrudRepository.save(accountOperation);
 
-        System.out.println(accountOperation.getId() + " : " + accountOperation.getAccountId() + " : " + accountOperation.getSum() + " : " + accountOperation.getPid() + " : " + accountOperation.getOperationState());
+        System.out.println("newAccountOperation: " + accountOperation.getId() + " : " + accountOperation.getAccountId() + " : " + accountOperation.getSum() + " : " + accountOperation.getPid() + " : " + accountOperation.getOperationState());
 
         return new AccountOperationDTO(accountOperation.getId(), accountOperation.getAccountId(),
                 accountOperation.getOperationDate(),
@@ -87,7 +87,7 @@ public class AccountOperationService {
 
         }
 
-        System.out.println(accountOperation.getId() + " : " + accountOperation.getAccountId() + " : " + accountOperation.getSum() + " : " + accountOperation.getPid() + " : " + accountOperation.getOperationState());
+        System.out.println("executeWaitOperation: " + accountOperation.getId() + " : " + accountOperation.getAccountId() + " : " + accountOperation.getSum() + " : " + accountOperation.getPid() + " : " + accountOperation.getOperationState());
 
         return new AccountOperationDTO(accountOperation.getId(), accountOperation.getAccountId(),
                 accountOperation.getOperationDate(),
