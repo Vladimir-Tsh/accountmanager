@@ -1,6 +1,7 @@
 package ru.schipanovvv.accountmanager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +14,8 @@ import ru.schipanovvv.accountmanager.workers.WaitExecutor;
 
 @SpringBootApplication
 public class AccountmanagerApplication implements CommandLineRunner {
-	int countOperationsGenerator = 3;
+	@Value("${OperationsGenerator.count}")
+	int countOperationsGenerator;
 
 	@Autowired
 	private ApplicationContext context;
